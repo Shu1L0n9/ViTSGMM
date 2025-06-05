@@ -127,6 +127,7 @@ Main dependencies include:
 - scikit-learn
 - numpy
 - tqdm
+- datasets (for CleanSTL-10 loading from huggingface)
 
 See `requirements.txt` for details.
 
