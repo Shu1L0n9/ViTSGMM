@@ -40,11 +40,12 @@ dataset = load_dataset("Shu1L0n9/CleanSTL-10", split="train")
 
 ## 📘 Basic SGMM Methods
 
-We believe Miller and Uyar’s SGMM method has been underestimated due to the lack of available implementations.  
+We believe Miller and Uyar’s SGMM method has long been underestimated due to the lack of accessible implementations.  
 To support learning and research, we’ve open-sourced our SGMM implementations in both **Python** and **MATLAB** here:  
 👉 [Semi-Supervised-GMM](https://github.com/Shu1L0n9/Semi-Supervised-GMM)
 
-We hope this helps the community grow and explore more in this area! 🚀
+We hope this project not only helps the community grow, but also inspires extensions of SGMM into more domains and applications. 🚀
+
 ## Todo
 
 - [x] translate to English
