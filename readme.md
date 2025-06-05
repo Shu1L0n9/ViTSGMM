@@ -23,6 +23,20 @@ If you use this code or ideas from our work, please cite:
 }
 ```
 
+## 🧼 Clean STL-10 Dataset
+
+🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 `datasets` library.
+
+### 🔧 How to Load
+
+```python
+from datasets import load_dataset
+
+# Load the cleaned STL-10 dataset
+dataset = load_dataset("Shu1L0n9/CleanSTL-10", split="train")
+# Other available splits: "test", "unlabeled"
+```
+
 ## Todo
 
 - [x] translate to English
