@@ -3,6 +3,7 @@
 Official implementation of ViTSGMM: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels.
 
 [![arXiv](https://img.shields.io/badge/arXiv-2506.03582-b31b1b.svg)](https://arxiv.org/abs/2506.03582)
+[![HuggingFace Dataset](https://img.shields.io/badge/dataset%20on-HuggingFace-blue?logo=huggingface)](https://huggingface.co/datasets/Shu1L0n9/CleanSTL-10)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-cifar-7)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-cifar-7?p=vitsgmm-a-robust-semi-supervised-image-1)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-stl-3)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-stl-3?p=vitsgmm-a-robust-semi-supervised-image-1)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-cifar-8)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-cifar-8?p=vitsgmm-a-robust-semi-supervised-image-1)
