@@ -37,10 +37,14 @@ from datasets import load_dataset
 dataset = load_dataset("Shu1L0n9/CleanSTL-10", split="train")
 # Other available splits: "test", "unlabeled"
 ```
-## Basic SGMM Methods
 
-We think Miller and Uyar's SGMM method is often underestimated, and there is no reproduction code available online for its implementation. Therefore, we have open-sourced our SGMM implementation in Python and MATLAB in [Semi-Supervised-GMM](URL of the other repository) for everyone to learn and use.
+## 📘 Basic SGMM Methods
 
+We believe Miller and Uyar’s SGMM method has been underestimated due to the lack of available implementations.  
+To support learning and research, we’ve open-sourced our SGMM implementations in both **Python** and **MATLAB** here:  
+👉 [Semi-Supervised-GMM](https://github.com/Shu1L0n9/Semi-Supervised-GMM)
+
+We hope this helps the community grow and explore more in this area! 🚀
 ## Todo
 
 - [x] translate to English
