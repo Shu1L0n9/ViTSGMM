@@ -1,6 +1,6 @@
 # SemiOccam: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels
 
-Official implementation of ViTSGMM: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels.
+Official implementation of SemiOccam: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels.
 
 [![arXiv](https://img.shields.io/badge/arXiv-2506.03582-b31b1b.svg)](https://arxiv.org/abs/2506.03582)
 [![HuggingFace Dataset](https://img.shields.io/badge/dataset%20on-HuggingFace-blue?logo=huggingface)](https://huggingface.co/datasets/Shu1L0n9/CleanSTL-10)
@@ -119,7 +119,7 @@ If you use this code or ideas from our work, please cite:
 ## Project Structure
 
 ```
-ViTSGMM/
+SemiOccam/
 ├── README.md                    # Project documentation
 ├── requirements.txt             # Python dependencies
 ├── .gitignore                   # Git ignore file
