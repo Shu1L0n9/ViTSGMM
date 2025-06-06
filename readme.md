@@ -1,4 +1,4 @@
-# ViTSGMM: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels
+# SemiOccam: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels
 
 Official implementation of ViTSGMM: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels.
 
@@ -99,8 +99,8 @@ We hope this project not only helps the community grow, but also inspires extens
 If you use this code or ideas from our work, please cite:
 
 ```bibtex
-@misc{yann2025vitsgmm,
-      title={ViTSGMM: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels},
+@misc{yann2025semioccam,
+      title={SemiOccam: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels},
       author={Rui Yann and Xianglei Xing},
       year={2025},
       eprint={2506.03582},
