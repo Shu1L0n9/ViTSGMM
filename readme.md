@@ -9,81 +9,43 @@ Official implementation of SemiOccam: A Robust Semi-Supervised Image Recognition
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-cifar-8)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-cifar-8?p=vitsgmm-a-robust-semi-supervised-image-1)
 
 
-## 🧼 CleanSTL-10 Dataset, 🔧 How to Load?
+format.
+
+## 🧼 Clean STL-10 Dataset, 🔧 How to Load?
 
 🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 `webdataset` library.
 
-Make sure you fill huggingface token in the code below.
----
+### 🥸 Load with datasets library (Recommended, Quick start)
+
+```python
+from datasets import load_dataset
+
+# Login using e.g. `huggingface-cli login` to access this dataset
+ds = load_dataset("Shu1L0n9/CleanSTL-10")
+```
 
 ### 🔧 Load with WebDataset
 
 ```python
-from huggingface_hub import hf_hub_url, HfFileSystem
 import webdataset as wds
+from huggingface_hub import HfFileSystem, get_token, hf_hub_url
 
-# Replace with your actual Hugging Face token
-token = "your_huggingface_token_here"
-fs = HfFileSystem(token=token)
+splits = {'train': 'train-*.tar', 'test': 'test-*.tar', 'unlabeled': 'unlabeled-*.tar'}
 
-repo_id = "Shu1L0n9/CleanSTL-10"
-splits = {
-    'train': '**/train-*.tar',
-    'test': '**/test-*.tar',
-    'unlabeled': '**/unlabeled-*.tar'
-}
+# Login using e.g. `huggingface-cli login` to access this dataset
+fs = HfFileSystem()
+files = [fs.resolve_path(path) for path in fs.glob("hf://datasets/Shu1L0n9/CleanSTL-10/" + splits["train"])]
+urls = [hf_hub_url(file.repo_id, file.path_in_repo, repo_type="dataset") for file in files]
+urls = f"pipe: curl -s -L -H 'Authorization:Bearer {get_token()}' {'::'.join(urls)}"
 
-def load_split(split):
-    pattern = f"hf://datasets/{repo_id}/{splits[split]}"
-    files = [fs.resolve_path(p) for p in fs.glob(pattern)]
-    urls = [hf_hub_url(f.repo_id, f.path_in_repo, repo_type="dataset") for f in files]
-    pipe_url = f"pipe: curl -s -L -H 'Authorization:Bearer {token}' {'::'.join(urls)}"
-    return wds.WebDataset(pipe_url, shardshuffle=False).decode("pil")
-
-# Load the splits
-train_ds = load_split("train")
-test_ds = load_split("test")
-unlabeled_ds = load_split("unlabeled")
+ds = wds.WebDataset(urls).decode()
 ```
 
-> ℹ️ Requires: `webdataset`, `huggingface_hub`, `fsspec`
+> ℹ️ Requires: `webdataset`, `huggingface_hub`
 > Install with:
 
 ```bash
-pip install webdataset huggingface_hub fsspec
-```
-
----
-
-### 🔑 How to Get Your Hugging Face Token
-
-To download from Hugging Face with authentication, you’ll need a **User Access Token**:
-
-1. Visit [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
-2. Click **“New token”**
-3. Choose a name and select **“Read”** permission
-4. Click **“Generate”**, then copy the token
-5. Paste it into your script:
-
-   ```python
-   token = "your_token_here"
-   ```
-
-> ⚠️ **Keep your token private** and avoid hardcoding it in shared scripts.
-
-#### 💡 Optional: Use Environment Variable
-
-To avoid hardcoding your token:
-
-```bash
-export HF_TOKEN=your_token_here
-```
-
-Then in your Python script:
-
-```python
-import os
-token = os.getenv("HF_TOKEN")
+pip install webdataset huggingface_hub
 ```
 
 ## 📘 Basic SGMM Methods
