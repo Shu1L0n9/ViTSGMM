@@ -8,22 +8,6 @@ Official implementation of ViTSGMM: A Robust Semi-Supervised Image Recognition N
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-stl-3)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-stl-3?p=vitsgmm-a-robust-semi-supervised-image-1)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-cifar-8)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-cifar-8?p=vitsgmm-a-robust-semi-supervised-image-1)
 
-## Citation
-
-If you use this code or ideas from our work, please cite:
-
-```bibtex
-@misc{yann2025vitsgmm,
-      title={ViTSGMM: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels},
-      author={Rui Yann and Xianglei Xing},
-      year={2025},
-      eprint={2506.03582},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2506.03582}
-}
-```
-
 ## 🧼 Clean STL-10 Dataset
 
 🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 `datasets` library.
@@ -45,6 +29,22 @@ To support learning and research, we’ve open-sourced our SGMM implementations 
 👉 [Semi-Supervised-GMM](https://github.com/Shu1L0n9/Semi-Supervised-GMM)
 
 We hope this project not only helps the community grow, but also inspires extensions of SGMM into more domains and applications. 🚀
+
+## Citation
+
+If you use this code or ideas from our work, please cite:
+
+```bibtex
+@misc{yann2025vitsgmm,
+      title={ViTSGMM: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels},
+      author={Rui Yann and Xianglei Xing},
+      year={2025},
+      eprint={2506.03582},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2506.03582}
+}
+```
 
 ## Todo
 
