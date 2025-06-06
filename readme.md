@@ -8,62 +8,81 @@ Official implementation of ViTSGMM: A Robust Semi-Supervised Image Recognition N
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-stl-3)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-stl-3?p=vitsgmm-a-robust-semi-supervised-image-1)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-cifar-8)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-cifar-8?p=vitsgmm-a-robust-semi-supervised-image-1)
 
+
 ## 🧼 Clean STL-10 Dataset, 🔧 How to Load?
 
-🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 `datasets` library.
+🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 `webdataset` library.
 
-### 🔧 Use Webdataset
+---
+
+### 🔧 Load with WebDataset
 
 ```python
+from huggingface_hub import hf_hub_url, HfFileSystem
 import webdataset as wds
-from huggingface_hub import HfFileSystem, get_token, hf_hub_url
 
-# Make sure you are logged in via `huggingface-cli login`
-fs = HfFileSystem()
-token = get_token()
+# Replace with your actual Hugging Face token
+token = "your_huggingface_token_here"
+fs = HfFileSystem(token=token)
 
-def create_stl_dataset(split: str):
-    """
-    Creates a WebDataset for a given split name.
-    
-    Args:
-        split (str): The name of the split, one of 'train', 'test', or 'unlabeled'.
-        
-    Returns:
-        wds.WebDataset: The decoded WebDataset object.
-    """
-    repo_id = "Shu1L0n9/CleanSTL-10"
-    split_patterns = {
-        'train': '**/train-*.tar',
-        'test': '**/test-*.tar',
-        'unlabeled': '**/unlabeled-*.tar'
-    }
-
-    if split not in split_patterns:
-        raise ValueError(f"Split '{split}' not recognized. Use 'train', 'test', or 'unlabeled'.")
-
-    # Get file paths for the corresponding split
-    glob_pattern = f"hf://datasets/{repo_id}/{split_patterns[split]}"
-    files = [fs.resolve_path(path) for path in fs.glob(glob_pattern)]
-    
-    # Generate accessible URLs
-    urls = [hf_hub_url(file.repo_id, file.path_in_repo, repo_type="dataset") for file in files]
-    
-    # Use pipe and curl for efficient data streaming
-    urls_pipe = f"pipe: curl -s -L -H 'Authorization:Bearer {token}' {'::'.join(urls)}"
-    
-    # Create and return the dataset, decoding images with PIL
-    dataset = wds.WebDataset(urls_pipe).decode("pil")
-    return dataset
-
-# Load all three splits
-datasets = {
-    split_name: create_stl_dataset(split_name)
-    for split_name in ['train', 'test', 'unlabeled']
+repo_id = "Shu1L0n9/CleanSTL-10"
+splits = {
+    'train': '**/train-*.tar',
+    'test': '**/test-*.tar',
+    'unlabeled': '**/unlabeled-*.tar'
 }
 
-print("All splits have been loaded:", list(datasets.keys()))
+def load_split(split):
+    pattern = f"hf://datasets/{repo_id}/{splits[split]}"
+    files = [fs.resolve_path(p) for p in fs.glob(pattern)]
+    urls = [hf_hub_url(f.repo_id, f.path_in_repo, repo_type="dataset") for f in files]
+    pipe_url = f"pipe: curl -s -L -H 'Authorization:Bearer {token}' {'::'.join(urls)}"
+    return wds.WebDataset(pipe_url, shardshuffle=False).decode("pil")
 
+# Load the splits
+train_ds = load_split("train")
+test_ds = load_split("test")
+unlabeled_ds = load_split("unlabeled")
+```
+
+> ℹ️ Requires: `webdataset`, `huggingface_hub`, `fsspec`
+> Install with:
+
+```bash
+pip install webdataset huggingface_hub fsspec
+```
+
+---
+
+### 🔑 How to Get Your Hugging Face Token
+
+To download from Hugging Face with authentication, you’ll need a **User Access Token**:
+
+1. Visit [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
+2. Click **“New token”**
+3. Choose a name and select **“Read”** permission
+4. Click **“Generate”**, then copy the token
+5. Paste it into your script:
+
+   ```python
+   token = "your_token_here"
+   ```
+
+> ⚠️ **Keep your token private** and avoid hardcoding it in shared scripts.
+
+#### 💡 Optional: Use Environment Variable
+
+To avoid hardcoding your token:
+
+```bash
+export HF_TOKEN=your_token_here
+```
+
+Then in your Python script:
+
+```python
+import os
+token = os.getenv("HF_TOKEN")
 ```
 
 ## 📘 Basic SGMM Methods
