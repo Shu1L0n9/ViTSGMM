@@ -9,10 +9,11 @@ Official implementation of ViTSGMM: A Robust Semi-Supervised Image Recognition N
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-cifar-8)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-cifar-8?p=vitsgmm-a-robust-semi-supervised-image-1)
 
 
-## 🧼 Clean STL-10 Dataset, 🔧 How to Load?
+## 🧼 CleanSTL-10 Dataset, 🔧 How to Load?
 
 🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 `webdataset` library.
 
+Make sure you fill huggingface token in the code below.
 ---
 
 ### 🔧 Load with WebDataset
