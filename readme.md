@@ -8,18 +8,34 @@ Official implementation of ViTSGMM: A Robust Semi-Supervised Image Recognition N
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-stl-3)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-stl-3?p=vitsgmm-a-robust-semi-supervised-image-1)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-cifar-8)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-cifar-8?p=vitsgmm-a-robust-semi-supervised-image-1)
 
-## 🧼 Clean STL-10 Dataset
+## 🧼 Clean STL-10 Dataset, 🔧 How to Load?
 
 🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 `datasets` library.
 
-### 🔧 How to Load
+### 🔧 Huggingface datasets (recommended)
 
 ```python
 from datasets import load_dataset
 
-# Load the cleaned STL-10 dataset
-dataset = load_dataset("Shu1L0n9/CleanSTL-10", split="train")
-# Other available splits: "test", "unlabeled"
+# Login using e.g. `huggingface-cli login` to access this dataset
+ds = load_dataset("Shu1L0n9/CleanSTL-10")
+```
+
+### 🔧 Use Webdataset (e.g. for PyTorch streaming training)
+
+```python
+import webdataset as wds
+from huggingface_hub import HfFileSystem, get_token, hf_hub_url
+
+splits = {'train': 'cleanstl10-train.tar', 'test': 'cleanstl10-test.tar'}
+
+# Login using e.g. `huggingface-cli login` to access this dataset
+fs = HfFileSystem()
+files = [fs.resolve_path(path) for path in fs.glob("hf://datasets/Shu1L0n9/CleanSTL-10/" + splits["train"])]
+urls = [hf_hub_url(file.repo_id, file.path_in_repo, repo_type="dataset") for file in files]
+urls = f"pipe: curl -s -L -H 'Authorization:Bearer {get_token()}' {'::'.join(urls)}"
+
+ds = wds.WebDataset(urls).decode()
 ```
 
 ## 📘 Basic SGMM Methods
