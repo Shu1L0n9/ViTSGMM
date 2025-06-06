@@ -12,30 +12,58 @@ Official implementation of ViTSGMM: A Robust Semi-Supervised Image Recognition N
 
 🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 `datasets` library.
 
-### 🔧 Huggingface datasets (recommended)
-
-```python
-from datasets import load_dataset
-
-# Login using e.g. `huggingface-cli login` to access this dataset
-ds = load_dataset("Shu1L0n9/CleanSTL-10")
-```
-
-### 🔧 Use Webdataset (e.g. for PyTorch streaming training)
+### 🔧 Use Webdataset
 
 ```python
 import webdataset as wds
 from huggingface_hub import HfFileSystem, get_token, hf_hub_url
 
-splits = {'train': 'cleanstl10-train.tar', 'test': 'cleanstl10-test.tar'}
-
-# Login using e.g. `huggingface-cli login` to access this dataset
+# Make sure you are logged in via `huggingface-cli login`
 fs = HfFileSystem()
-files = [fs.resolve_path(path) for path in fs.glob("hf://datasets/Shu1L0n9/CleanSTL-10/" + splits["train"])]
-urls = [hf_hub_url(file.repo_id, file.path_in_repo, repo_type="dataset") for file in files]
-urls = f"pipe: curl -s -L -H 'Authorization:Bearer {get_token()}' {'::'.join(urls)}"
+token = get_token()
 
-ds = wds.WebDataset(urls).decode()
+def create_stl_dataset(split: str):
+    """
+    Creates a WebDataset for a given split name.
+    
+    Args:
+        split (str): The name of the split, one of 'train', 'test', or 'unlabeled'.
+        
+    Returns:
+        wds.WebDataset: The decoded WebDataset object.
+    """
+    repo_id = "Shu1L0n9/CleanSTL-10"
+    split_patterns = {
+        'train': '**/train-*.tar',
+        'test': '**/test-*.tar',
+        'unlabeled': '**/unlabeled-*.tar'
+    }
+
+    if split not in split_patterns:
+        raise ValueError(f"Split '{split}' not recognized. Use 'train', 'test', or 'unlabeled'.")
+
+    # Get file paths for the corresponding split
+    glob_pattern = f"hf://datasets/{repo_id}/{split_patterns[split]}"
+    files = [fs.resolve_path(path) for path in fs.glob(glob_pattern)]
+    
+    # Generate accessible URLs
+    urls = [hf_hub_url(file.repo_id, file.path_in_repo, repo_type="dataset") for file in files]
+    
+    # Use pipe and curl for efficient data streaming
+    urls_pipe = f"pipe: curl -s -L -H 'Authorization:Bearer {token}' {'::'.join(urls)}"
+    
+    # Create and return the dataset, decoding images with PIL
+    dataset = wds.WebDataset(urls_pipe).decode("pil")
+    return dataset
+
+# Load all three splits
+datasets = {
+    split_name: create_stl_dataset(split_name)
+    for split_name in ['train', 'test', 'unlabeled']
+}
+
+print("All splits have been loaded:", list(datasets.keys()))
+
 ```
 
 ## 📘 Basic SGMM Methods
