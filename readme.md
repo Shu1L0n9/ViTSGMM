@@ -10,7 +10,7 @@ Official implementation of SemiOccam: A Robust Semi-Supervised Image Recognition
 
 ## 🧼 Clean STL-10 Dataset, 🔧 How to Load?
 
-🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 'datasets' or `webdataset` library.
+🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 `datasets` or `webdataset` library.
 
 ### 🥸 Load with datasets library (Recommended, Quick start)
 
