@@ -8,9 +8,6 @@ Official implementation of SemiOccam: A Robust Semi-Supervised Image Recognition
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-stl-3)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-stl-3?p=vitsgmm-a-robust-semi-supervised-image-1)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitsgmm-a-robust-semi-supervised-image-1/semi-supervised-image-classification-on-cifar-8)](https://paperswithcode.com/sota/semi-supervised-image-classification-on-cifar-8?p=vitsgmm-a-robust-semi-supervised-image-1)
 
-
-format.
-
 ## 🧼 Clean STL-10 Dataset, 🔧 How to Load?
 
 🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 'datasets' or `webdataset` library.
