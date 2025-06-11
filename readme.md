@@ -10,7 +10,14 @@ Official implementation of SemiOccam: A Robust Semi-Supervised Image Recognition
 
 ## 🧼 Clean STL-10 Dataset, 🔧 How to Load?
 
-🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 `datasets` or `webdataset` library.
+🎉 We uploaded our cleaned STL-10 dataset to Hugging Face! You can easily load and use it with the 🤗 'datasets' or `webdataset` library.
+
+### Data Splits
+
+* `train_labeled`
+* `train_unlabeled`
+* `test`
+
 
 ### 🥸 Load with datasets library (Recommended, Quick start)
 
@@ -44,6 +51,17 @@ ds = wds.WebDataset(urls).decode()
 ```bash
 pip install webdataset huggingface_hub
 ```
+
+### 🔑 How to Get Your Hugging Face Token
+
+To download from Hugging Face with authentication, you’ll need a **User Access Token**:
+
+1. Visit [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
+2. Click **“New token”**
+3. Choose a name and select **“Read”** permission
+4. Click **“Generate”**, then copy the token
+
+> ⚠️ **Keep your token private** and avoid hardcoding it in shared scripts.
 
 ## 📘 Basic SGMM Methods
 
