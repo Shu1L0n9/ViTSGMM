@@ -27,11 +27,11 @@ ds = load_dataset("Shu1L0n9/CleanSTL-10")
 import webdataset as wds
 from huggingface_hub import HfFileSystem, get_token, hf_hub_url
 
-splits = {'train': 'train-*.tar', 'test': 'test-*.tar', 'unlabeled': 'unlabeled-*.tar'}
+splits = {'train_labeled': 'train-*.tar', 'train_unlabeled': 'unlabeled-*.tar', 'test': 'test-*.tar'}
 
 # Login using e.g. `huggingface-cli login` to access this dataset
 fs = HfFileSystem()
-files = [fs.resolve_path(path) for path in fs.glob("hf://datasets/Shu1L0n9/CleanSTL-10/" + splits["train"])]
+files = [fs.resolve_path(path) for path in fs.glob("hf://datasets/Shu1L0n9/CleanSTL-10/" + splits["train_labeled"])]
 urls = [hf_hub_url(file.repo_id, file.path_in_repo, repo_type="dataset") for file in files]
 urls = f"pipe: curl -s -L -H 'Authorization:Bearer {get_token()}' {'::'.join(urls)}"
 
