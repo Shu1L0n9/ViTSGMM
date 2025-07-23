@@ -77,8 +77,8 @@ If you use this code or ideas from our work, please cite:
 
 ```bibtex
 @misc{yann2025semioccam,
-      title={SemiOccam: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels},
-      author={Rui Yann and Xianglei Xing},
+      title={SemiOccam: A Robust Semi-Supervised Image Recognition Network Using Sparse Labels}, 
+      author={Rui Yann and Tianshuo Zhang and Xianglei Xing},
       year={2025},
       eprint={2506.03582},
       archivePrefix={arXiv},
